@@ -6,15 +6,21 @@ export class Ellipse {
         this.height = height;
         this.rotation = rotation;
         
-        const random = Math.floor(Math.random() * 3);
-        if (random === 0) {
+        const random = Math.random();
+        if (random < 0.2) {
             this.fillStyle = '#D32F2F';
         }
-        else if (random === 1) {
-            this.fillStyle = '#FFF8E1';
+        else if (random < 0.35) {
+            this.fillStyle = '#FFCCBC';
+        }
+        else if (random < 0.5) {
+            this.fillStyle = '#ffd66e';
+        }
+        else if (random < 0.6) {
+            this.fillStyle = '#7a4f35';
         }
         else {
-            this.fillStyle = '#FFCCBC';
+            this.fillStyle = '#FFF8E1';
         }
         this.kappa = .5522848 + Math.random() * 0.15;
         this.widthMultiple = Math.random() * 0.01 + 1;
@@ -71,8 +77,8 @@ export class Ellipse {
             xStart, y - oy,
             xStart, y
         )
-        ctx.strokeStyle = '#000000';
-        ctx.stroke();
+        // ctx.strokeStyle = '#000000';
+        // ctx.stroke();
 
         ctx.fillStyle = this.fillStyle;
         ctx.fill();

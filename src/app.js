@@ -1,5 +1,5 @@
-import { Circle } from './circle.js';
-import { Pattern } from './pattern.js';
+import { Circle } from './kiwi/circle.js';
+import { Pattern } from './ellipsePattern/pattern.js';
 
 class App {
     constructor() {
@@ -32,10 +32,11 @@ class App {
     animate(t) {
         this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
 
+        this.circle.draw(this.ctx);
+        
+        this.ctx.globalCompositeOperation = 'destination-over';
         this.ctx.fillStyle = '#10dEe1';
         this.ctx.fillRect(0, 0, this.stageWidth, this.stageHeight);
-
-        this.circle.draw(this.ctx);
 
         requestAnimationFrame(this.animate.bind(this));
     }
