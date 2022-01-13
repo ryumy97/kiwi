@@ -1,7 +1,8 @@
+import { Theme } from "../constants/themes.js";
 import { Pattern } from "../ellipsePattern/pattern.js";
 import { getBezierCurvePoint } from "../lib/curve.js";
 
-export class Kiwi {
+export class Bird {
     constructor(x, y, radius) {
         this.x = x;
         this.y = y;
@@ -18,8 +19,14 @@ export class Kiwi {
         this.pattern.resize(this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
     }
 
-    draw(ctx) {
+    move(x, y) {
+        this.x = x;
+        this.y = y;
+        
+        this.pattern.resize(this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
+    }
 
+    draw(ctx) {
         this.drawHead(ctx, this.x, this.y, this.radius);
         this.drawMouth(ctx, this.x, this.y, this.radius);
         this.drawEye(ctx, this.x - this.radius * 0.6, this.y - this.radius * 0.35, this.radius * 0.016);
@@ -65,10 +72,10 @@ export class Kiwi {
 
         ctx.globalCompositeOperation = 'source-over';
         
-        ctx.fillStyle = '#FFF8E1';
+        ctx.fillStyle = Theme.bird.headColor;
         ctx.fill();
 
-        ctx.strokeStyle = '#000000';
+        ctx.strokeStyle = Theme.common.black;
         ctx.stroke();
     }
 
@@ -94,10 +101,10 @@ export class Kiwi {
             x - radius * 0.72, y - radius * 0.25
         )
         
-        ctx.fillStyle = '#D32F2F';
+        ctx.fillStyle = Theme.bird.mouthColor;
         ctx.fill();
 
-        ctx.strokeStyle = '#000000';
+        ctx.strokeStyle = Theme.common.black;
         ctx.stroke();
 
         ctx.beginPath();
@@ -133,10 +140,10 @@ export class Kiwi {
         ctx.beginPath();
         ctx.arc(x, y, radius, 0, 2 * Math.PI);
         
-        ctx.fillStyle = '#000000';
+        ctx.fillStyle = Theme.common.black;
         ctx.fill();
 
-        ctx.strokeStyle = '#000000';
+        ctx.strokeStyle = Theme.common.black;
         ctx.stroke();
     }
 
@@ -172,10 +179,10 @@ export class Kiwi {
             x + radius * 0.05, y + radius * 0.68
         );
 
-        ctx.fillStyle = '#D32F2F';
+        ctx.fillStyle = Theme.bird.feetColor;
         ctx.fill();
 
-        ctx.strokeStyle = '#000000';
+        ctx.strokeStyle = Theme.common.black;
         ctx.stroke();
         
         this.drawFootLine(ctx, 0, rightToeBezierCurve1, rightToeBezierCurve2, {
@@ -233,10 +240,10 @@ export class Kiwi {
             x + radius * 0.12, y + radius * 0.46
         );
 
-        ctx.fillStyle = '#D32F2F';
+        ctx.fillStyle = Theme.bird.feetColor;
         ctx.fill();
 
-        ctx.strokeStyle = '#000000';
+        ctx.strokeStyle = Theme.common.black;
         ctx.stroke();
 
         const legBezierCurve1 = {
@@ -361,10 +368,10 @@ export class Kiwi {
             x + radius * 0.38, y + radius * 0.63
         );
 
-        ctx.fillStyle = '#D32F2F';
+        ctx.fillStyle = Theme.bird.feetColor;
         ctx.fill();
 
-        ctx.strokeStyle = '#000000';
+        ctx.strokeStyle = Theme.common.black;
         ctx.stroke();
         
         this.drawFootLine(ctx, 0.2, rightToeBezierCurve1, rightToeBezierCurve2, {
@@ -422,10 +429,10 @@ export class Kiwi {
             x + radius * 0.45, y + radius * 0.427
         );
 
-        ctx.fillStyle = '#D32F2F';
+        ctx.fillStyle = Theme.bird.feetColor;
         ctx.fill();
 
-        ctx.strokeStyle = '#000000';
+        ctx.strokeStyle = Theme.common.black;
         ctx.stroke();
 
         const legBezierCurve1 = {
@@ -602,7 +609,7 @@ export class Kiwi {
         ctx.fill();
 
         ctx.globalCompositeOperation = 'source-over';
-        ctx.strokeStyle = '#000000';
+        ctx.strokeStyle = Theme.common.black;
         ctx.stroke();
     }
 }

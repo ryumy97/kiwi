@@ -1,8 +1,14 @@
-import { Circle } from './kiwi/circle.js';
-import { Pattern } from './ellipsePattern/pattern.js';
+import { CircleHandler } from './kiwi/circleHandler.js';
+import { ColorList } from './components/colorList.js';
+import { ShareList } from './components/shareList.js';
+import { LoadingOverlay } from './components/loadingOverlay.js'
 
 class App {
     constructor() {
+        //loading starts
+        this.LoadingOverlay = new LoadingOverlay();
+        
+        //create canvas
         this.canvas = document.createElement('canvas');
         this.ctx = this.canvas.getContext('2d');
         document.body.appendChild(this.canvas);
@@ -10,12 +16,29 @@ class App {
         this.stageWidth = document.body.clientWidth;
         this.stageHeight = document.body.clientHeight;
 
-        this.circle = new Circle(this.stageWidth, this.stageHeight);
+        this.circle = new CircleHandler(this.stageWidth, this.stageHeight);
 
         window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
 
+        //create options
+        const container = document.createElement("div");
+        container.className = 'container';
+        
+        this.colorList = new ColorList();
+        this.colorList.appendTo(container);
+
+        this.shareList = new ShareList();
+        this.shareList.appendTo(container);
+
+        document.body.appendChild(container);
+
+        window.addEventListener('_selectTheme', this.selectTheme.bind(this), false);
+        window.addEventListener('_drawTheme', this.drawTheme.bind(this), false);
+
+        //loading ends
         requestAnimationFrame(this.animate.bind(this));
+        this.LoadingOverlay.loadingComplete();
     }
 
     resize() {
@@ -30,15 +53,27 @@ class App {
     }
 
     animate(t) {
+        if (this.LoadingOverlay && this.LoadingOverlay.isLoading) {
+            return
+        }
+        this.circle.update();
+
         this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
 
         this.circle.draw(this.ctx);
-        
-        this.ctx.globalCompositeOperation = 'destination-over';
-        this.ctx.fillStyle = '#10dEe1';
-        this.ctx.fillRect(0, 0, this.stageWidth, this.stageHeight);
 
         requestAnimationFrame(this.animate.bind(this));
+    }
+
+    selectTheme(e) {
+        this.LoadingOverlay.startLoading(e.detail.selected.id);
+    }
+
+    drawTheme(e) {
+        console.log('drawing Theme')
+        console.log(e)
+        this.circle.changeTheme(e.detail.selectedTheme);
+        e.detail.completeLoading();
     }
 }
 

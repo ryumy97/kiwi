@@ -1,5 +1,6 @@
 import { EllipseGroup } from './ellipseGroup.js';
 import { getQuadraticCurvePoint, getQuadraticCurveSlope } from '../lib/curve.js';
+import { Theme } from '../constants/themes.js';
 
 export class CurvedPattern {
     constructor({
@@ -26,13 +27,8 @@ export class CurvedPattern {
         this.rotation = Math.atan(diffy / diffx) / Math.PI / 2;
 
         const diff = Math.sqrt(diffx * diffx + diffy * diffy)
-        console.log({x1,y1,x2,y2})
-        console.log({diff, diffx, diffy});
-        console.log(height)
 
         const length = Math.floor(((diffx + diffy)) / height * 2);
-
-        console.log(length)
 
         this.ellipses = [];
 
@@ -131,7 +127,7 @@ export class CurvedPattern {
             this.x2, this.y2
         )
 
-        ctx.strokeStyle = '#ff0000';
+        ctx.strokeStyle = Theme.common.red;
         ctx.stroke();
 
         this.ellipses.forEach((ellipse, index) => {
@@ -146,7 +142,7 @@ export class CurvedPattern {
                 index / (this.ellipses.length - 1),
             );
 
-            ctx.fillStyle = '#ff0000';
+            ctx.fillStyle = Theme.common.red;
             ctx.arc(pt.x, pt.y, 2.5, 0, 2 * Math.PI); 
             ctx.fill();
 

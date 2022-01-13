@@ -1,3 +1,5 @@
+import { Theme } from "../constants/themes.js";
+
 export class Ellipse {
     constructor(x, y, width, height, rotation) {
         this.x = x;
@@ -8,19 +10,19 @@ export class Ellipse {
         
         const random = Math.random();
         if (random < 0.2) {
-            this.fillStyle = '#D32F2F';
+            this.fillStyle = Theme.bird.featherColor1
         }
         else if (random < 0.35) {
-            this.fillStyle = '#FFCCBC';
+            this.fillStyle = Theme.bird.featherColor2
         }
         else if (random < 0.5) {
-            this.fillStyle = '#ffd66e';
+            this.fillStyle = Theme.bird.featherColor3
         }
         else if (random < 0.6) {
-            this.fillStyle = '#7a4f35';
+            this.fillStyle = Theme.bird.featherColor4
         }
         else {
-            this.fillStyle = '#FFF8E1';
+            this.fillStyle = Theme.bird.featherColor5
         }
         this.kappa = .5522848 + Math.random() * 0.15;
         this.widthMultiple = Math.random() * 0.01 + 1;
@@ -77,7 +79,7 @@ export class Ellipse {
             xStart, y - oy,
             xStart, y
         )
-        // ctx.strokeStyle = '#000000';
+        // ctx.strokeStyle = Theme.common.black;
         // ctx.stroke();
 
         ctx.fillStyle = this.fillStyle;

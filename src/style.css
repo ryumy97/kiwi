@@ -23,3 +23,217 @@ canvas {
     width: 100%;
     height: 100%;
 }
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.shareList {
+    display: flex;
+    position: fixed;
+    right: 22px;
+    height: 100%;
+    z-index: 100;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.btn {
+    width: 51px;
+    height: 51px;
+    list-style: none;
+    cursor: pointer;
+}
+
+.shareList > .btn {
+    background-image: url(../assets/buttons@2x.png);
+    background-repeat: no-repeat;
+    background-size: 102px 748px;
+    
+    animation: shareListItem 0.4s ease-out both;
+}
+
+.shareList > .btn:nth-child(1) {
+    animation-delay: 0.1s;
+}
+.shareList > .btn:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.shareList > .btn:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes shareListItem {
+    from {
+        transform: translateX(73px) rotate(2.86274509804rad);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.fb {
+    background-position: 0 -51px;
+}
+
+.fb:hover {
+    background-position: -51px -51px;
+}
+
+.tw {
+    background-position: 0 -102px;
+}
+
+.tw:hover {
+    background-position: -51px -102px;
+}
+
+.pin {
+    background-position: 0 -204px;
+}
+
+.pin:hover {
+    background-position: -51px -204px;
+}
+
+.colorList {
+    display: flex;
+    position: fixed;
+    left: 22px;
+    height: 100%;
+    z-index: 100;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.colorList > .btn {
+    width: 30px;
+    height: 30px;
+    margin: 10px 0px;
+
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 2px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    transition: border .2s linear, opacity .2s linear;
+    animation: colorListItem 0.4s ease-out both;
+}
+
+.colorList > .btn:nth-child(1) {
+    animation-delay: 0.1s;
+}
+.colorList > .btn:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+@keyframes colorListItem {
+    from {
+        transform: translateX(-52px) rotate(-3.46666666667rad);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.colorList > .btn.selected, .colorList > .btn:hover {
+    border-width: 4px;
+
+    transition: border .1s linear, opacity .1s linear;
+}
+
+.bird {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    justify-items: stretch;
+    align-items: stretch;
+}
+
+.bird * {
+    width: 100%;
+    height: 100%;
+}
+
+.bird :nth-child(1) {
+    background-color: #00CED1;
+
+    grid-row: 1 / 3;
+}
+
+.bird :nth-child(2) {
+    background-color: #D32F2F;
+}
+
+.bird :nth-child(3) {
+    background-color: #ffd66e;
+}
+
+.fruit {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    justify-items: stretch;
+    align-items: stretch;
+}
+
+.fruit div {
+    width: 100%;
+    height: 100%;
+}
+
+.fruit :nth-child(1) {
+    background-color: #669933;
+}
+
+.fruit :nth-child(2) {
+    background-color: #663333;
+}
+
+.overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+}
+
+.overlay.new {
+    animation: loadingAnimation 1s cubic-bezier(.83,.05,.21,.92) both;
+}
+
+@keyframes loadingAnimation {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;;
+    }
+}
+
+.overlay.disable {
+    opacity: 0;
+    transition: opacity .2s linear;
+}
+
+.overlay.bird {
+    background-color: #10dEe1;
+}
+
+.overlay.fruit {
+    background-color: #669933;
+}
