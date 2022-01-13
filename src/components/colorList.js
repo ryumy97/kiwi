@@ -5,9 +5,14 @@ export class ColorList {
         this.listElement = document.createElement('ul');
         this.listElement.className = 'colorList';
 
+        this.hash = window.location.hash
+            ? window.location.hash
+            : '#bird'
+
         const bird = document.createElement('li');
         bird.id = 'bird';
-        bird.className = 'btn bird selected';
+        bird.className = 'btn bird';
+        this.hash === '#bird' ? bird.classList.add('selected') : null;
         bird.append(
             document.createElement('div'),
             document.createElement('div'),
@@ -19,6 +24,7 @@ export class ColorList {
         const fruit = document.createElement('li');
         fruit.id = 'fruit';
         fruit.className = 'btn fruit';
+        this.hash === '#fruit' ? fruit.classList.add('selected') : null;
         fruit.append(
             document.createElement('div'),
             document.createElement('div')
@@ -26,7 +32,11 @@ export class ColorList {
 
         this.list.push(fruit);
 
-        this.selected = bird;
+        this.selected = this.hash === '#bird' 
+            ? bird 
+            : this.hash === '#fruit'
+            ? fruit
+            : bird;
 
         this.listElement.append(...this.list);
 

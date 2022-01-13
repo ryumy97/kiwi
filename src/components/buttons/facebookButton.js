@@ -8,7 +8,7 @@ export class facebookButton {
             FB.ui({
                 display: 'popup',
                 method: 'share',
-                href: location.href
+                href: `https://kiwi.ryumy.com/${window.location.hash}`
             }, (response) => {})
         }
     }
