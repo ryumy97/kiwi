@@ -9,7 +9,9 @@ export class facebookButton {
                 display: 'popup',
                 method: 'share',
                 href: `https://kiwi.ryumy.com/${window.location.hash}`
-            }, (response) => {})
+            }, (response) => {
+                window.location.hash = '';
+            })
         }
     }
 }
