@@ -36,6 +36,9 @@ class App {
         window.addEventListener('_selectTheme', this.selectTheme.bind(this), false);
         window.addEventListener('_drawTheme', this.drawTheme.bind(this), false);
 
+        //prevent default
+        document.addEventListener("touchmove", (e) => {e.preventDefault()}, {passive: false});
+
         //loading ends
         requestAnimationFrame(this.animate.bind(this));
         this.LoadingOverlay.loadingComplete();
