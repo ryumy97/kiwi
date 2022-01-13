@@ -7,7 +7,8 @@ export class facebookButton {
         this.element.onclick = () => {
             FB.ui({
                 display: 'popup',
-                method: 'share'
+                method: 'share',
+                href: location.href
             }, (response) => {})
         }
     }
