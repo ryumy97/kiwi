@@ -1,5 +1,5 @@
 import { Theme } from "../constants/themes.js";
-import { Pattern } from "../sunPattern/Pattern.js";
+import { Pattern } from "../sunPattern/pattern.js";
 
 export class Fruit {
     constructor(x, y, radius) {
