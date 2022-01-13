@@ -1,11 +1,11 @@
+import { facebookButton } from "./buttons/facebookButton.js";
+
 export class ShareList {
     constructor() {
         this.listElement = document.createElement('ul');
         this.listElement.className = 'shareList';
         
-        const fb = document.createElement('li');
-        fb.id = 'share-fb';
-        fb.className = 'btn fb';
+        const fb = new facebookButton();
 
         const tw = document.createElement('li');
         tw.id = 'share-tw';
@@ -15,7 +15,7 @@ export class ShareList {
         pin.id = 'share-pin';
         pin.className = 'btn pin';
 
-        this.listElement.append(fb, tw, pin);
+        this.listElement.append(fb.element, tw, pin);
     }
 
     appendTo(container) {

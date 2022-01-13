@@ -73,6 +73,7 @@ export class ColorList {
             });
 
             window.dispatchEvent(event);
+            window.location.href = `#${e.id}`;
         }
         this.selected = e;
     }
