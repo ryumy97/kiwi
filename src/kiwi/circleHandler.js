@@ -3,7 +3,7 @@ import { Theme } from "../constants/themes.js";
 
 export class CircleHandler {
     constructor(stageWidth, stageHeight) {
-        this.themeName = 'fruit';
+        this.themeName = 'bird';
         
         this.stageWidth = stageWidth;
         this.stageHeight = stageHeight;
