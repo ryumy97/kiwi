@@ -62,7 +62,7 @@ export class CircleHandler {
         this.vx = this.stageWidth * 0.04;
         this.ax = 0;
         this.vy = this.stageHeight * 0.01;
-        this.ay = this.stageHeight * 0.005;
+        this.ay = this.stageHeight * 0.002;
 
         this.angularV = 0;
 
@@ -85,13 +85,13 @@ export class CircleHandler {
     }
 
     updateY() {
-        this.vy *= 0.95;
+        this.vy *= 0.98;
         this.vy += this.ay;
         this.circle.move(this.circle.x, this.circle.y + this.vy);
 
         if (this.circle.y > this.stageHeight * 0.8 - this.circle.radius) {
             this.circle.move(this.circle.x, this.stageHeight * 0.8 - this.circle.radius)
-            this.vy *= -0.95
+            this.vy *= -0.85
         }
     }
 
