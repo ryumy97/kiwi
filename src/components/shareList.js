@@ -13,6 +13,13 @@ export class ShareList {
         const pin = document.createElement('li');
         pin.id = 'share-pin';
         pin.className = 'btn pin';
+        pin.onclick = () => {
+            PinUtils.pinOne({
+                url: `https://kiwi.ryumy.com/${window.location.hash}`,
+                media: "https://kiwi.ryumy.com/assets/share1x1.png",
+                description: "Kiwi - Ryumy\nMini project by In Ha Ryu"
+            })
+        }
 
         this.listElement.append(fb.element, tw.element, pin);
     }
