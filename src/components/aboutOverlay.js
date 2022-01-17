@@ -9,13 +9,56 @@ export class AboutOverlay {
         this.stageHeight = stageHeight;
 
         this.height = stageHeight;
-        this.width = stageHeight;
+        this.width = stageHeight * 1.2;
 
-        this.startX = stageWidth / 2 - this.width / 2;
+        this.startX = this.stageWidth > this.width
+            ? stageWidth / 2 - this.width / 2
+            : stageWidth - this.width;
 
         this.overlay = document.createElement('div');
         this.overlay.id = 'overlay';
         this.overlay.className = 'overlay about';
+
+        this.overlayContent = document.createElement('div');
+        this.overlayContent.className = 'overlay text';
+        this.overlayContent.innerHTML = `
+            <div>
+                <div class="heading">
+                    <h1>Kiwi</h1>
+                    <h3 style="color:${Theme[theme].circleColor}">/\ˈki\ːwi\ː/</h3>
+                </div>    
+                <hr>
+                <p>
+                    <i>noun</i><br>
+                    noun: kiwi; plural noun: kiwis; noun: Kiwi; plural noun: Kiwis<br><br>
+                    <strong>Kiwi</strong>
+                    <br><br>
+                    <ol>
+                        <li>
+                            a flightless New Zealand bird with hairlike feathers, having a long downcurved bill with sensitive nostrils at the tip.
+                        </li>
+                        <li>
+                            a fruit with a thin hairy skin, green flesh, and black seeds.
+                        </li>
+                        <li>
+                            a New Zealander.
+                        </li>
+                    </ol>
+                </p>
+                <p>
+                    This mini project holds an interactive experience of using an entity called <i>kiwi</i>.
+                    The word <strong>Kiwi</strong> is an interesting word as it holds different meaning. A bird, a fruit or a New Zealander.
+                    The kiwi is expressed in single form of circle or a ball which user can grab and move around in a physical environment.
+                    <br>
+                </p>
+                <style>
+                    .overlay.text *::selection {
+                        color: ${Theme[theme].circleColor};
+                        background-color: ${theme === 'bird' ? Theme.bird.mouthColor : Theme.fruit.skinColor};
+                    }
+                </style>
+            </div>
+        `
 
         this.t = 0;
         this.vt = 0.001;
@@ -23,6 +66,7 @@ export class AboutOverlay {
 
     appendTo(container) {
         container.appendChild(this.overlay);
+        container.appendChild(this.overlayContent);
         this.container = container;
 
         this.appending = true;
@@ -59,6 +103,7 @@ export class AboutOverlay {
             if (this.t < 0) {
                 this.t = 0;
                 this.container.removeChild(this.overlay);
+                this.container.removeChild(this.overlayContent);
 
                 if (this.removing) {
                     this.removing = false;
@@ -98,6 +143,7 @@ export class AboutOverlay {
             return
         }
         this.overlay.style.opacity = this.t * 0.6;
+        this.overlayContent.style.opacity = this.t * 1;
 
         const rightBezierCurve1 = {
             start: {x: this.startX + this.width * 0.6, y: this.stageHeight},

@@ -10,6 +10,8 @@
     margin: 0;
     padding: 0;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    
+    font-family: Google Sans Text,arial,sans-serif;
 }
 
 html {
@@ -300,7 +302,7 @@ canvas {
     opacity: 1;
 }
 
-.bottomList .primary .text:hover {
+.bottomList .primary .text.hover {
     opacity: 0.5;
 }
 
@@ -357,4 +359,73 @@ canvas {
     opacity: 0;
     background-color: black;
     z-index: 10;
+}
+
+.overlay.text {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    cursor: text;
+
+    width: auto;
+    height: auto;
+
+    max-width: 500px;
+
+    padding: 95px;
+    margin: auto;
+
+    color: white;
+    z-index: 99;
+}
+
+.overlay.text * {
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text; 
+    -moz-user-select: text; 
+    -ms-user-select: text; 
+    user-select: text; 
+}
+
+.overlay .heading {
+    display: inline-block;
+    padding: 2px;
+}
+
+.overlay.text h1 {
+    font-size: 32px;
+}
+
+.overlay.text h3 {
+    font-size: 18px;
+}
+
+.overlay.text p {
+    font-size: 12px;
+}
+
+.overlay.text li {
+    font-size: 12px;
+}
+
+.overlay .heading h3 {
+    padding-top: 4px;
+}
+
+ol {
+    padding-left: 40px;
+}
+
+ol li {
+    padding-bottom: 20px;
 }

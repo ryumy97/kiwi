@@ -10,6 +10,9 @@ export class AboutButton {
         aboutText.className = 'text'
         aboutText.innerText = 'about this project';
 
+        aboutText.addEventListener('pointerenter', this.mouseEnter.bind(this, aboutText), false);
+        aboutText.addEventListener('pointerleave', this.mouseLeave.bind(this, aboutText), false);
+
         this.isOverlayOn = window.location.hash.includes('/about');
         this.overlayRendering = this.isOverlayOn;
 
@@ -53,5 +56,14 @@ export class AboutButton {
         }
 
         this.isOverlayOn = !this.isOverlayOn;
+    }
+
+    mouseEnter(aboutText) {
+        aboutText.classList.add('hover');
+        
+    }
+
+    mouseLeave(aboutText) {
+        aboutText.classList.remove('hover');
     }
 }

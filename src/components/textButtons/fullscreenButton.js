@@ -11,8 +11,13 @@ export class fullscreenButton {
         this.hoverBackground = document.createElement('div')
         this.hoverBackground.className = 'background';
 
-        this.element.addEventListener('mouseenter', this.mouseEnter.bind(this), false);
-        this.element.addEventListener('mouseleave', this.mouseLeave.bind(this), false);
+        this.element.addEventListener('pointerenter', this.mouseEnter.bind(this), false);
+        this.element.addEventListener('pointerleave', this.mouseLeave.bind(this), false);
+        
+        document.addEventListener('fullscreenchange', this.fullscreenChange.bind(this), false);
+        document.addEventListener('mozfullscreenchange', this.fullscreenChange.bind(this), false);
+        document.addEventListener('MSFullscreenChange', this.fullscreenChange.bind(this), false);
+        document.addEventListener('webkitfullscreenchange', this.fullscreenChange.bind(this), false);
 
         this.element.onclick = this.openfullScreen.bind(this);
 
@@ -21,28 +26,10 @@ export class fullscreenButton {
 
     openfullScreen() {
         if (this.isFullscreen()) {
-            if (this.cancelFullScreen()) {
-                this.fullscreenText.innerText = 'fullscreen'
-                this.hoverBackground.style.width = `${this.fullscreenText.clientWidth + 10}px`;
-
-                this.element.addEventListener('mouseenter', this.mouseEnter.bind(this), false);
-                this.element.addEventListener('mouseleave', this.mouseLeave.bind(this), false);
-
-                this.element.removeEventListener('mouseenter', this.fullscreenMouseEnter.bind(this), false);
-                this.element.removeEventListener('mouseleave', this.fullscreenMouseLeave.bind(this), false);
-            }
+            this.cancelFullScreen();
         }
         else {
-            if (this.requestFullScreen()) {
-                this.fullscreenText.innerText = 'exit fullscreen';
-                this.hoverBackground.style.width = `${this.fullscreenText.clientWidth + 10}px`;
-
-                this.element.removeEventListener('mouseenter', this.mouseEnter.bind(this), false);
-                this.element.removeEventListener('mouseleave', this.mouseLeave.bind(this), false);
-
-                this.element.addEventListener('mouseenter', this.fullscreenMouseEnter.bind(this), false);
-                this.element.addEventListener('mouseleave', this.fullscreenMouseLeave.bind(this), false);
-            }
+            this.requestFullScreen();
         }
     }
 
@@ -64,6 +51,7 @@ export class fullscreenButton {
             document.webkitCancelFullScreen();  
             return true;
         }
+        window.scrollTo(0, 0);
     }
 
     requestFullScreen() {
@@ -82,25 +70,44 @@ export class fullscreenButton {
         }
     }
 
+    fullscreenChange(e) {
+        if (this.isFullscreen()) {
+            this.fullscreenText.innerText = 'exit fullscreen';
+            this.hoverBackground.style.width = `${this.fullscreenText.clientWidth + 10}px`;
+
+            this.hoverBackground.classList.add('on');
+            this.fullscreenText.classList.add('hover');
+        }
+        else {
+            this.fullscreenText.innerText = 'fullscreen'
+            this.hoverBackground.style.width = `${this.fullscreenText.clientWidth + 10}px`;
+
+            this.hoverBackground.classList.remove('on');
+            this.fullscreenText.classList.remove('hover');
+        }
+    }
+
     mouseEnter() {
-        this.hoverBackground.classList.add('on');
-        this.fullscreenText.classList.add('hover');
+        if (this.isFullscreen()) {
+            this.hoverBackground.classList.remove('on');
+            this.fullscreenText.classList.remove('hover');
+        }
+        else {
+            this.hoverBackground.classList.add('on');
+            this.fullscreenText.classList.add('hover');
+        }
         this.hoverBackground.style.width = `${this.fullscreenText.clientWidth + 10}px`;
     }
 
     mouseLeave() {
-        this.hoverBackground.classList.remove('on');
-        this.fullscreenText.classList.remove('hover');
-    }
-    
-    fullscreenMouseEnter() {
-        this.hoverBackground.classList.remove('on');
-        this.fullscreenText.classList.remove('hover');
-    }
-    
-    fullscreenMouseLeave() {
-        this.hoverBackground.classList.add('on');
-        this.fullscreenText.classList.add('hover');
+        if (this.isFullscreen()) {
+            this.hoverBackground.classList.add('on');
+            this.fullscreenText.classList.add('hover');
+        }
+        else {
+            this.hoverBackground.classList.remove('on');
+            this.fullscreenText.classList.remove('hover');
+        }
         this.hoverBackground.style.width = `${this.fullscreenText.clientWidth + 10}px`;
     }
 } 
