@@ -381,7 +381,7 @@ canvas {
 
     max-width: 500px;
 
-    padding: 95px;
+    padding: 95px 95px 125px 95px;
     margin: auto;
 
     color: white;
@@ -428,4 +428,71 @@ ol {
 
 ol li {
     padding-bottom: 20px;
+}
+
+.aboutLink {
+    text-decoration: underline;
+    color: #fff;
+    opacity: 0.6;
+    cursor: pointer;
+
+    transition: opacity .2s linear;
+    -moz-transition: opacity .2s linear;
+    -webkit-transition: opacity .2s linear;
+    -o-transition: opacity .2s linear;
+}
+
+.aboutLink:hover {
+    opacity: 1;
+}
+
+.overlay.text div .textAppear1 {
+    animation: textAppear 1s ease-in-out both 0.5s;
+}
+
+.overlay.text div .textAppear2 {
+    animation: textAppear 1s ease-in-out both 0.7s;
+}
+
+.overlay.text div .textAppear3 {
+    animation: textAppear 1s ease-in-out both 0.8s;
+}
+
+.overlay.text div .textAppear4 {
+    animation: textAppear 1s ease-in-out both 0.9s;
+}
+
+.overlay.text div .textAppear5 {
+    animation: textAppear 1s ease-in-out both 1s;
+}
+
+.overlay.text div .textAppear6 {
+    animation: textAppear 1s ease-in-out both 1.1s;
+}
+
+.overlay.text div .textAppear7 {
+    animation: textAppear 1s ease-in-out both 1.2s;
+}
+
+.overlay.text div .textAppear8 {
+    animation: textAppear 1s ease-in-out both 1.3s;
+}
+
+.overlay.text div .textAppear9 {
+    animation: textAppear 1s ease-in-out both 1.4s;
+}
+
+.overlay.text div .textAppear10 {
+    animation: textAppear 1s ease-in-out both 1.5s;
+}
+
+@keyframes textAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

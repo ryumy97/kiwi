@@ -23,33 +23,43 @@ export class AboutOverlay {
         this.overlayContent.className = 'overlay text';
         this.overlayContent.innerHTML = `
             <div>
-                <div class="heading">
+                <div class="heading textAppear1">
                     <h1>Kiwi</h1>
                     <h3 style="color:${Theme[theme].circleColor}">/\ˈki\ːwi\ː/</h3>
                 </div>    
-                <hr>
-                <p>
+                <hr class="textAppear2">
+                <p class="textAppear3">
                     <i>noun</i><br>
                     noun: kiwi; plural noun: kiwis; noun: Kiwi; plural noun: Kiwis<br><br>
-                    <strong>Kiwi</strong>
+                    <strong class="textAppear4">Kiwi</strong>
                     <br><br>
                     <ol>
-                        <li>
+                        <li class="textAppear5">
                             a flightless New Zealand bird with hairlike feathers, having a long downcurved bill with sensitive nostrils at the tip.
                         </li>
-                        <li>
+                        <li class="textAppear6">
                             a fruit with a thin hairy skin, green flesh, and black seeds.
                         </li>
-                        <li>
+                        <li class="textAppear7">
                             a New Zealander.
                         </li>
                     </ol>
                 </p>
-                <p>
+                <p class="textAppear8">
                     This mini project holds an interactive experience of using an entity called <i>kiwi</i>.
                     The word <strong>Kiwi</strong> is an interesting word as it holds different meaning. A bird, a fruit or a New Zealander.
                     The kiwi is expressed in single form of circle or a ball which user can grab and move around in a physical environment.
-                    <br>
+                    As kiwi represents the several meaning, so the aim was to create simple container with different patterns of colors and drawings.
+                </p>
+                <p class="textAppear9">
+                    If you want to contact me, check out my<br>
+                    <a href="mailto:inha.ryu.97@gmail.com">
+                        <span class='aboutLink'>e-mail</span>
+                    </a>
+                    <br><br>
+                </p>
+                <p class="textAppear10">
+                    Copyright &copy; 2021 In Ha Ryu. All rights reserved.
                 </p>
                 <style>
                     .overlay.text *::selection {
@@ -142,7 +152,7 @@ export class AboutOverlay {
         if (this.t <= 0) {
             return
         }
-        this.overlay.style.opacity = this.t * 0.6;
+        this.overlay.style.opacity = this.t * 0.8;
         this.overlayContent.style.opacity = this.t * 1;
 
         const rightBezierCurve1 = {
