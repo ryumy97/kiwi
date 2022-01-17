@@ -41,17 +41,20 @@ export class fullscreenButton {
     }
     
     cancelFullScreen() {
-        if (document.cancelFullScreen) {  
-            document.cancelFullScreen();
+        if (document.exitFullscreen) {  
+            document.exitFullscreen();
             return true;
         } else if (document.mozCancelFullScreen) {  
             document.mozCancelFullScreen();  
             return true;
-        } else if (document.webkitCancelFullScreen) {  
-            document.webkitCancelFullScreen();  
+        } else if (document.webkitExitFullscreen) {  
+            document.webkitExitFullscreen();  
             return true;
         }
         window.scrollTo(0, 0);
+
+        const resizeEvent = new Event('resize');
+        window.dispatchEvent(resizeEvent);
     }
 
     requestFullScreen() {

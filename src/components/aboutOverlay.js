@@ -50,7 +50,7 @@ export class AboutOverlay {
                     The word <strong>Kiwi</strong> is an interesting word as it holds different meaning. A bird, a fruit or a New Zealander.
                     The kiwi is expressed in single form of circle or a ball which user can grab and move around in a physical environment.
                     As kiwi represents the several meaning, so the aim was to create simple container with different patterns of colors and drawings.
-                    <br>
+                    <br><br>
                 </p>
                 <p class="textAppear9">
                     If you want to contact me, check out my<br>
@@ -376,7 +376,6 @@ export class AboutOverlay {
 
         ctx.beginPath();
         ctx.moveTo(path.start.x, path.start.y);
-        // console.log(path)
         ctx.bezierCurveTo(path.cp1.x, path.cp1.y, path.cp2.x, path.cp2.y, path.end.x, path.end.y);
         ctx.strokeStyle = Theme.common.red;
         ctx.stroke();
@@ -410,7 +409,6 @@ export class AboutOverlay {
 
         ctx.beginPath();
         ctx.moveTo(path.start.x, path.start.y);
-        // console.log(path)
         ctx.quadraticCurveTo(path.cp.x, path.cp.y, path.end.x, path.end.y);
         ctx.strokeStyle = Theme.common.red;
         ctx.stroke();

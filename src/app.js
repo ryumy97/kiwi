@@ -112,7 +112,6 @@ class App {
     }
 
     toggleAboutOverlay(e) {
-        console.log(e.detail);
         const { turnOverlayOn } = e.detail;
         
         this.isOverlayOn = turnOverlayOn;

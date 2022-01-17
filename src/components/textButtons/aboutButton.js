@@ -26,7 +26,6 @@ export class AboutButton {
 
     finishRendering() {
         this.overlayRendering = false;
-        console.log('yes');
     }
 
     dispatchAboutOverlayEvent() {
@@ -44,11 +43,9 @@ export class AboutButton {
         window.dispatchEvent(event);
         
         if (!this.isOverlayOn) {
-            console.log(window.location.hash)
             location.replace(`${window.location.hash !== '' ? window.location.hash : '#'}/about`);
         }
         else {
-            console.log('replacement')
             const href = window.location.href;
             const replacement = href.replace('/about', '');
 
