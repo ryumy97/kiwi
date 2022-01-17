@@ -15,7 +15,6 @@ export class LoadingOverlay {
 
     loadingAnimationEnd(theme) {
         this.isLoading = true;
-        console.log(theme)
 
         const event = new CustomEvent('_drawTheme', {
             detail: {

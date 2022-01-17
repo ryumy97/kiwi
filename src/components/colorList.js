@@ -1,5 +1,5 @@
 export class ColorList {
-    constructor() {
+    constructor(disabled = false) {
         this.list = [];
 
         this.listElement = document.createElement('ul');
@@ -12,7 +12,7 @@ export class ColorList {
         const bird = document.createElement('li');
         bird.id = 'bird';
         bird.className = 'btn bird';
-        this.hash === '#bird' ? bird.classList.add('selected') : null;
+        this.hash.includes('#bird') ? bird.classList.add('selected') : null;
         bird.append(
             document.createElement('div'),
             document.createElement('div'),
@@ -24,7 +24,7 @@ export class ColorList {
         const fruit = document.createElement('li');
         fruit.id = 'fruit';
         fruit.className = 'btn fruit';
-        this.hash === '#fruit' ? fruit.classList.add('selected') : null;
+        this.hash.includes('#fruit') ? fruit.classList.add('selected') : null;
         fruit.append(
             document.createElement('div'),
             document.createElement('div')
@@ -32,23 +32,47 @@ export class ColorList {
 
         this.list.push(fruit);
 
-        this.selected = this.hash === '#bird' 
+        this.selected = this.hash.includes('#bird') 
             ? bird 
-            : this.hash === '#fruit'
+            : this.hash.includes('#fruit')
             ? fruit
             : bird;
 
         this.listElement.append(...this.list);
+
+        !disabled && this.list.forEach((item) => {
+            item.addEventListener('mouseenter', this.mouseEnterListener.bind(this), false);
+            item.addEventListener('mousedown', this.mouseClickListener.bind(this, item), false);
+            item.addEventListener('mouseleave', this.mouseLeaveListener.bind(this), false);
+        })
+
+        this.disabled = disabled;
+        disabled && this.listElement.classList.add('disabled');
+    }
+
+    appendTo(container) {
+        container.appendChild(this.listElement);
+    }
+
+    disable() {
+        this.disabled = true;
+        this.listElement.classList.add('disabled');
+        this.list.forEach((item) => {
+            item.removeEventListener('mouseenter', this.mouseEnterListener.bind(this), false);
+            item.removeEventListener('mousedown', this.mouseClickListener.bind(this, item), false);
+            item.removeEventListener('mouseleave', this.mouseLeaveListener.bind(this), false);
+        })
+    }
+
+    enable () {
+        this.disabled = false;
+        this.listElement.classList.remove('disabled');
 
         this.list.forEach((item) => {
             item.addEventListener('mouseenter', this.mouseEnterListener.bind(this), false);
             item.addEventListener('mousedown', this.mouseClickListener.bind(this, item), false);
             item.addEventListener('mouseleave', this.mouseLeaveListener.bind(this), false);
         })
-    }
-
-    appendTo(container) {
-        container.appendChild(this.listElement);
     }
 
     mouseEnterListener(e) {
@@ -83,7 +107,8 @@ export class ColorList {
             });
 
             window.dispatchEvent(event);
-            window.location.href = `#${e.id}`;
+            
+            location.replace(`#${e.id}`);
         }
         this.selected = e;
     }

@@ -2,10 +2,8 @@ import { Circle } from "./circle.js";
 import { Theme } from "../constants/themes.js";
 
 export class CircleHandler {
-    constructor(stageWidth, stageHeight) {
-        this.themeName =  window.location.hash && (window.location.hash === '#bird' || window.location.hash === '#fruit')
-            ? window.location.hash.substring(1)
-            : 'bird';
+    constructor(stageWidth, stageHeight, themeName) {
+        this.themeName = themeName;
         
         this.stageWidth = stageWidth;
         this.stageHeight = stageHeight;
@@ -69,7 +67,19 @@ export class CircleHandler {
         this.circle = new Circle(x, y, radius, Math.PI * 1.1, this.themeName);
     }
 
+    pause() {
+        this.paused = true;
+    }
+
+    resume() {
+        this.paused = false;
+    }
+
     update() {
+        if (this.paused) {
+            return;
+        }
+
         if (this.mousePos && this.isSelected) {
             const xdiff = this.mousePos.x - this.circle.x - this.difference.x;
             const ydiff = this.mousePos.y - this.circle.y - this.difference.y;
@@ -158,6 +168,11 @@ export class CircleHandler {
     }
 
     onDown(e) {
+        if (this.paused) {
+            document.body.style.cursor = 'default';
+            return
+        }
+
         this.mousePos = {
             x: e.clientX,
             y: e.clientY
@@ -184,6 +199,11 @@ export class CircleHandler {
     }
 
     onMove(e) {
+        if (this.paused) {
+            document.body.style.cursor = 'default';
+            return
+        }
+
         if (this.isSelected) {
             this.mousePos = {
                 x: e.clientX,
@@ -204,6 +224,11 @@ export class CircleHandler {
     }
 
     onUp(e) {
+        if (this.paused) {
+            document.body.style.cursor = 'default';
+            return
+        }
+
         this.mousePos = null;
         this.originalMousePos = null;
         this.isSelected = false;
