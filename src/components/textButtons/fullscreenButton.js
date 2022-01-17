@@ -51,7 +51,6 @@ export class fullscreenButton {
             document.webkitExitFullscreen();  
             return true;
         }
-        window.scrollTo(0, 0);
 
         const resizeEvent = new Event('resize');
         window.dispatchEvent(resizeEvent);
@@ -88,6 +87,8 @@ export class fullscreenButton {
             this.hoverBackground.classList.remove('on');
             this.fullscreenText.classList.remove('hover');
         }
+
+        window.scrollTo(0, 0);
     }
 
     mouseEnter() {
