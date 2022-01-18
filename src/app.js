@@ -61,14 +61,6 @@ class App {
         //prevent default
         document.addEventListener("touchmove", (e) => {e.preventDefault()}, {passive: false});
 
-        //fps
-        this.fps = {
-            startTime: Date.now(),
-            then: Date.now(),
-            now: Date.now(),
-            fpsInterval: 1000 / 60
-        }
-
         //loading ends
         requestAnimationFrame(this.animate.bind(this));
         this.LoadingOverlay.loadingComplete();
@@ -87,14 +79,6 @@ class App {
     }
 
     animate(t) {
-        this.fps.now = Date.now();
-        const elapsed = this.fps.now - this.fps.then;
-        console.log(elapsed)
-        if (elapsed < this.fps.fpsInterval) {
-            requestAnimationFrame(this.animate.bind(this));
-            return
-        }
-
         if (this.LoadingOverlay && this.LoadingOverlay.isLoading) {
             return
         }
@@ -114,8 +98,6 @@ class App {
                 null
             }
         }
-
-        this.fps.then = this.fps.now - (elapsed % this.fps.fpsInterval);
 
         requestAnimationFrame(this.animate.bind(this));
     }

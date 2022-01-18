@@ -16,10 +16,12 @@ export class CircleHandler {
         this.openingProgress = 0;
         this.speed = (1 - this.openingProgress) / 20;
         
-        this.vx = this.stageWidth * 0.04;
+        this.vx = this.stageWidth * 0.0175;
         this.ax = 0;
         this.vy = this.stageHeight * 0.01;
         this.ay = this.stageHeight * 0.005;
+
+        console.log(this.vx)
 
         this.angularV = 0;
 
@@ -57,7 +59,7 @@ export class CircleHandler {
         this.openingProgress = 0;
         this.speed = (1 - this.openingProgress) / 20;
         
-        this.vx = this.stageWidth * 0.04;
+        this.vx = this.stageWidth * 0.0175;
         this.ax = 0;
         this.vy = this.stageHeight * 0.01;
         this.ay = this.stageHeight * 0.002;
@@ -69,6 +71,7 @@ export class CircleHandler {
 
     pause() {
         this.paused = true;
+        this.then = false;
     }
 
     resume() {
@@ -76,6 +79,13 @@ export class CircleHandler {
     }
 
     update() {
+        console.log(this.vx);
+        this.now = Date.now();
+        const elapsed = this.then ? this.now - this.then : 1000/60;
+        const interval = 1000 / 60
+
+        const ratio = elapsed / interval;
+
         if (this.paused) {
             return;
         }
@@ -84,37 +94,39 @@ export class CircleHandler {
             const xdiff = this.mousePos.x - this.circle.x - this.difference.x;
             const ydiff = this.mousePos.y - this.circle.y - this.difference.y;
 
-            this.vx = xdiff * 0.2;
+            this.vx = xdiff * 0.2 * ratio;
             this.ax = 0;
-            this.vy = ydiff * 0.2;
+            this.vy = ydiff * 0.2 * ratio;
             this.ay = 0;
-            this.angularV *= 0.95;
+            this.angularV *= 0.95 * ratio;
         }
-        this.updateX();
-        this.updateY();
+        this.updateX(ratio);
+        this.updateY(ratio);
+
+        this.then = Date.now();
     }
 
-    updateY() {
-        this.vy *= 0.99;
-        this.vy += this.ay;
+    updateY(ratio) {
+        this.vy *= 1 - 0.01 * ratio;
+        this.vy += this.ay * ratio;
         this.circle.move(this.circle.x, this.circle.y + this.vy);
 
         if (this.circle.y > this.stageHeight * 0.8 - this.circle.radius) {
             this.circle.move(this.circle.x, this.stageHeight * 0.8 - this.circle.radius)
-            this.vy *= -0.75
+            this.vy *= -0.75;
         }
     }
 
-    updateX() {
-        this.vx += this.ax;
+    updateX(ratio) {
+        this.vx += this.ax * ratio;
         this.ax = 0;
 
         if (this.circle.y >= this.stageHeight * 0.8 - this.circle.radius) {
-            this.vx *= 0.95;
+            this.vx *= 1 - 0.05 * ratio;
             this.angularV = this.vx / this.circle.radius;
         }
         else {        
-            this.vx *= 0.975;
+            this.vx *= 1 - 0.025 * ratio;
         }
         
         this.circle.move(this.circle.x + this.vx, this.circle.y)

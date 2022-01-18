@@ -101,14 +101,20 @@ export class AboutOverlay {
     }
 
     update() {
+        this.now = Date.now();
+        const elapsed = this.then ? this.now - this.then : 1000 / 60;
+        const interval = 1000 / 60
+
+        const ratio = elapsed / interval;
+
         if (this.removing) {
             if (this.t > 0.5) {
+                this.vt *= 1 + (0.1 * ratio);
                 this.t += this.vt;
-                this.vt *= 1.1;
             }     
             else if (this.t <= 0.5 && this.t > 0) {
+                this.vt =  (- (this.t) / 300 - 0.0001) * ratio;
                 this.t += this.vt;
-                this.vt *= 0.882;
             }
 
             if (this.t < 0) {
@@ -126,12 +132,12 @@ export class AboutOverlay {
         }
         else {
             if (this.t < 0.5) {
+                this.vt *= 1 + (0.1 * ratio);
                 this.t += this.vt;
-                this.vt *= 1.1;
             }
             else if (this.t >= 0.5 && this.t < 1) {
+                this.vt = ((1 - this.t) / 4 + 0.0001) * ratio ;
                 this.t += this.vt;
-                this.vt *= 0.882;
             }
     
             // this.t += this.vt;
@@ -147,6 +153,8 @@ export class AboutOverlay {
                 }
             }
         }
+
+        this.then = Date.now();
     }
 
     draw(ctx) {
