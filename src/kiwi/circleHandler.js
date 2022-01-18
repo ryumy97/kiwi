@@ -21,8 +21,6 @@ export class CircleHandler {
         this.vy = this.stageHeight * 0.01;
         this.ay = this.stageHeight * 0.005;
 
-        console.log(this.vx)
-
         this.angularV = 0;
 
         this.circle = new Circle(x, y, radius, Math.PI * 1.1, this.themeName);
@@ -79,7 +77,6 @@ export class CircleHandler {
     }
 
     update() {
-        console.log(this.vx);
         this.now = Date.now();
         const elapsed = this.then ? this.now - this.then : 1000/60;
         const interval = 1000 / 60
