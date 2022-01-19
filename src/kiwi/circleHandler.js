@@ -81,7 +81,8 @@ export class CircleHandler {
         const elapsed = this.then ? this.now - this.then : 1000/60;
         const interval = 1000 / 60
 
-        const ratio = elapsed / interval;
+        let ratio = elapsed / interval;
+        ratio = ratio > 2 ? 2 : ratio;
 
         if (this.paused) {
             return;
