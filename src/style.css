@@ -496,3 +496,25 @@ ol li {
         transform: translateY(0);
     }
 }
+
+.awwwards {
+    position: fixed;
+    z-index: 999;
+    transform: translateY(-50%) translateX(-100%);
+    top: 50%;
+    left: 0;
+
+    transition: transform .2s .2s cubic-bezier(.82,.06,.16,.99);
+    -moz-transition: transform .2s .2s cubic-bezier(.82,.06,.16,.99);
+    -webkit-transition: transform .2s .2s cubic-bezier(.82,.06,.16,.99);
+    -o-transition: transform .2s .2s cubic-bezier(.82,.06,.16,.99);
+}
+
+.awwwards.show {
+    transform: translateY(-50%) translateX(0%);
+
+    transition: transform .2s .2s cubic-bezier(.82,.06,.16,.99);
+    -moz-transition: transform .2s .2s cubic-bezier(.82,.06,.16,.99);
+    -webkit-transition: transform .2s .2s cubic-bezier(.82,.06,.16,.99);
+    -o-transition: transform .2s .2s cubic-bezier(.82,.06,.16,.99);
+}

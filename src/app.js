@@ -4,6 +4,7 @@ import { ShareList } from './components/shareList.js';
 import { BottomList } from './components/bottomList.js';
 import { LoadingOverlay } from './components/loadingOverlay.js';
 import { AboutOverlay } from './components/aboutOverlay.js';
+import { AwwwardsNominees } from './components/awwwardsNominee.js'
 
 class App {
     constructor() {
@@ -26,11 +27,13 @@ class App {
             : 'bird';
 
         this.circle = new CircleHandler(this.stageWidth, this.stageHeight, this.themeName);
+        this.awwward = new AwwwardsNominees();
 
         this.isOverlayOn = window.location.hash.includes('/about');
         if (this.isOverlayOn) {
             this.circle.pause();
             this.aboutOverlay = new AboutOverlay(this.stageWidth, this.stageHeight, this.themeName);
+            this.awwward.show(this.themeName);
         }
 
         window.addEventListener('resize', this.resize.bind(this), false);
@@ -51,6 +54,7 @@ class App {
         this.bottomList.appendTo(container);
 
         this.aboutOverlay && this.aboutOverlay.appendTo(container);
+        this.awwward.appendTo(container);
 
         document.body.appendChild(container);
 
@@ -129,13 +133,15 @@ class App {
             this.aboutOverlay = new AboutOverlay(this.stageWidth, this.stageHeight, this.themeName);
             const container = document.getElementById('container');
             this.aboutOverlay.appendTo(container);
+
+            this.awwward.show(this.themeName);
     
             this.colorList.disable();
             
         }
         else {
             this.aboutOverlay.remove();
-
+            this.awwward.hide();
             window.addEventListener('_about_removeFinish', this.didRemoveAboutOverlay.bind(this), false);
         }
     }

@@ -1,6 +1,6 @@
 import { Theme } from '../constants/themes.js';
 import { getQuadraticCurveProgress, getQuadraticCurvePath, getBezierCurveProgress, getBezierCurvePath } from '../lib/progress.js';
-
+import { AwwwardsNominees } from './awwwardsNominee.js';
 export class AboutOverlay {
     constructor(stageWidth, stageHeight, theme) {
         this.theme = theme;
